@@ -1,0 +1,15 @@
+{
+  "name": "youtube-url-extension",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "node tool/zip.js"
+  },
+  "author": "",
+  "license": "Zlib",
+  "devDependencies": {
+    "@types/chrome": "0.0.200",
+    "jszip": "^3.10.1"
+  }
+}

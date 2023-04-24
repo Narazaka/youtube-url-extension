@@ -1,0 +1,44 @@
+.youtube-url-extension.youtube-url-button {
+    padding: .5em;
+    background: #fff;
+    color: #333;
+    border: 1px solid #333;
+    box-sizing: border-box;
+    text-decoration: none;
+    margin: 0 .3em;
+    display: inline-block;
+    font-size: 1.2em;
+    font-weight: bold;
+    line-height: 1.2em;
+    text-align: center;
+    user-select: none;
+    cursor: pointer;
+}
+.youtube-url-extension.youtube-url-button:hover {
+    background: #ddd;
+}
+.youtube-url-extension.youtube-url-video-button {
+    margin: 0 .3em;
+    position: relative;
+}
+.youtube-url-extension.youtube-url-thumbnail-button {
+    margin: 0;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
+}
+.youtube-url-extension.youtube-url-copy-complete {
+    margin: 0;
+    padding: .2em;
+    position: absolute;
+    top: 3em;
+    right: -1px;
+    z-index: 101;
+    background: #fff;
+    color: #333;
+    border: 1px solid #333;
+    user-select: none;
+    width: 8em;
+    height: 1.5em;
+}

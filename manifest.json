@@ -1,0 +1,17 @@
+{
+  "name": "YouTube URLを最低限だけコピるやつ",
+  "description": "YouTube動画のURLを最低限だけコピるやつです",
+  "version": "1.0.0",
+  "manifest_version": 3,
+  "icons": {
+    "128": "icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.youtube.com/*"],
+      "js": ["content.js"],
+      "css": ["content.css"]
+    }
+  ],
+  "permissions": []
+}
