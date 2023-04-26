@@ -4,7 +4,13 @@ const { version } = require("../package.json");
 
 const root = __dirname + "/..";
 
-const filenames = ["content.js", "content.css", "icon.png"];
+const filenames = [
+  "content.js",
+  "content.css",
+  "icon.png",
+  "options.html",
+  "options.js",
+];
 function compress(suffix, manifest) {
   const zip = new JSZip();
 

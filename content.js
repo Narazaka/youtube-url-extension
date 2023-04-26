@@ -10,6 +10,37 @@ const mutationObserverInit = {
 };
 
 /**
+ * @typedef Options
+ * @property {string} prefixUrl
+ */
+
+/** @type {Options} */
+let options;
+
+async function loadOptionsFirst() {
+  options = await loadOptions();
+}
+
+function prefixUrl() {
+  return options ? options.prefixUrl || "" : "";
+}
+
+/**
+ *
+ * @returns {Promise<Options>}
+ */
+async function loadOptions() {
+  return new Promise((resolve) => {
+    chrome.storage.local.get(
+      {
+        prefixUrl: "",
+      },
+      (optionsArg) => resolve(/** @type {Options} */ (optionsArg)),
+    );
+  });
+}
+
+/**
  * @param {string} url
  */
 const toPlainUrl = (url) => {
@@ -65,7 +96,7 @@ function createThumbnailButton() {
 }
 
 function linkFromLocation() {
-  return toPlainUrl(location.href);
+  return prefixUrl() + toPlainUrl(location.href);
 }
 
 /**
@@ -73,7 +104,7 @@ function linkFromLocation() {
  * @param {HTMLAnchorElement} $el
  */
 function genLinkFromElement($el) {
-  return () => toPlainUrl($el.href);
+  return () => prefixUrl() + toPlainUrl($el.href);
 }
 
 /**
@@ -249,6 +280,7 @@ function wait(ms) {
 }
 
 async function main() {
+  await loadOptionsFirst();
   /** @type {Element | null} */
   let element = null;
   let index = 0;

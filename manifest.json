@@ -13,5 +13,8 @@
       "css": ["content.css"]
     }
   ],
-  "permissions": []
+  "options_ui": {
+    "page": "options.html"
+  },
+  "permissions": ["storage"]
 }
