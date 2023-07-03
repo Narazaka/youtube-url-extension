@@ -15,7 +15,7 @@ async function loadOptions() {
   });
 }
 
-const jinnaiPrefixUrl = "https://nextnex.com/?url=";
+const jinnaiPrefixUrl = "https://vrc.kuroneko6423.com/proxy?url=";
 
 document.addEventListener("DOMContentLoaded", async function () {
   const $prefixUrl = /** @type {HTMLInputElement} */ (
