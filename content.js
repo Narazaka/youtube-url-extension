@@ -139,6 +139,7 @@ function createElementLinks(
  */
 function genCreateLinks($parent) {
   return () => {
+    // 動画ページ・ショートのメイン動画
     for (const $el of $parent.querySelectorAll("#actions")) {
       const createLink = genCreateLink($el, createMenuButton, linkFromLocation);
       const observer = new MutationObserver(createLink);
@@ -146,15 +147,29 @@ function genCreateLinks($parent) {
       observers.push(observer);
       createLink();
     }
+    // おすすめ・チャンネルタブ・履歴
     createElementLinks(
       $parent,
       ".ytd-rich-grid-media .yt-simple-endpoint.ytd-thumbnail",
       ($el) => {
         if (!$el.parentElement) return null;
         if (!$el.parentElement.parentElement) return null;
-        return $el.parentElement.parentElement.querySelector("#details");
+        if (!$el.parentElement.parentElement.parentElement) return null;
+        return $el.parentElement.parentElement.parentElement.querySelector("#details");
       },
     );
+    // おすすめ・チャンネルタブのショート
+    createElementLinks(
+      $parent,
+      ".ytd-rich-grid-slim-media .yt-simple-endpoint.ytd-thumbnail",
+      ($el) => {
+        if (!$el.parentElement) return null;
+        if (!$el.parentElement.parentElement) return null;
+        if (!$el.parentElement.parentElement.parentElement) return null;
+        return $el.parentElement.parentElement.parentElement.querySelector("#details");
+      },
+    );
+    // チャンネルホーム
     createElementLinks(
       $parent,
       ".ytd-grid-video-renderer .yt-simple-endpoint.ytd-thumbnail",
@@ -162,6 +177,36 @@ function genCreateLinks($parent) {
         if (!$el.parentElement) return null;
         if (!$el.parentElement.parentElement) return null;
         return $el.parentElement.parentElement.querySelector("#details");
+      },
+    );
+    // チャンネルホーム
+    createElementLinks(
+      $parent,
+      ".ytd-grid-playlist-renderer .yt-simple-endpoint.ytd-thumbnail",
+      ($el) => {
+        if (!$el.parentElement) return null;
+        if (!$el.parentElement.parentElement) return null;
+        return $el.parentElement.parentElement.querySelector("#details");
+      },
+    );
+    // チャンネルホームのショート
+    createElementLinks(
+      $parent,
+      ".ytd-reel-item-renderer .yt-simple-endpoint.ytd-thumbnail",
+      ($el) => {
+        if (!$el.parentElement) return null;
+        if (!$el.parentElement.parentElement) return null;
+        return $el.parentElement.parentElement.querySelector("#details");
+      },
+    );
+    // 動画ページ横のオススメ欄
+    createElementLinks(
+      $parent,
+      ".ytd-compact-video-renderer .yt-simple-endpoint.ytd-thumbnail",
+      ($el) => {
+        if (!$el.parentElement) return null;
+        if (!$el.parentElement.parentElement) return null;
+        return $el.parentElement.parentElement.querySelector(".details");
       },
     );
     createElementLinks(
@@ -173,6 +218,7 @@ function genCreateLinks($parent) {
         return $el.parentElement.parentElement.querySelector(".text-wrapper");
       },
     );
+    // プレイリスト
     createElementLinks(
       $parent,
       ".ytd-playlist-video-renderer .yt-simple-endpoint.ytd-thumbnail",
@@ -184,6 +230,7 @@ function genCreateLinks($parent) {
         return meta;
       },
     );
+    // プレイリスト動画ページのプレイリスト動画一覧
     createElementLinks(
       $parent,
       ".ytd-playlist-panel-video-renderer .yt-simple-endpoint.ytd-thumbnail",
