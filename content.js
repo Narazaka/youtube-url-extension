@@ -147,7 +147,7 @@ function genCreateLinks($parent) {
       observers.push(observer);
       createLink();
     }
-    // おすすめ・チャンネルタブ・履歴
+    // チャンネルタブ・履歴のショート
     createElementLinks(
       $parent,
       ".ytd-rich-grid-media .yt-simple-endpoint.ytd-thumbnail",
@@ -157,6 +157,24 @@ function genCreateLinks($parent) {
         if (!$el.parentElement.parentElement.parentElement) return null;
         return $el.parentElement.parentElement.parentElement.querySelector("#details");
       },
+    );
+    // おすすめの動画・履歴の動画
+    createElementLinks(
+      $parent,
+      ".yt-lockup-view-model .yt-lockup-view-model__content-image",
+      ($el) => {
+        if (!$el.parentElement) return null;
+        return $el.parentElement.querySelector(".yt-lockup-metadata-view-model__text-container");
+      }
+    );
+    // おすすめのショート
+    createElementLinks(
+      $parent,
+      ".shortsLockupViewModelHost .shortsLockupViewModelHostEndpoint",
+      ($el) => {
+        if (!$el.parentElement) return null;
+        return $el.parentElement.querySelector(".shortsLockupViewModelHostOutsideMetadata");
+      }
     );
     // おすすめ・チャンネルタブのショート
     createElementLinks(
