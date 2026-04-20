@@ -161,10 +161,10 @@ function genCreateLinks($parent) {
     // おすすめの動画・履歴の動画
     createElementLinks(
       $parent,
-      ".yt-lockup-view-model .yt-lockup-view-model__content-image",
+      "yt-lockup-view-model .ytLockupViewModelContentImage",
       ($el) => {
         if (!$el.parentElement) return null;
-        return $el.parentElement.querySelector(".yt-lockup-metadata-view-model__text-container");
+        return $el.parentElement.querySelector(".ytLockupMetadataViewModelTextContainer");
       }
     );
     // おすすめのショート
