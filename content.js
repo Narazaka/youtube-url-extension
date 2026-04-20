@@ -123,9 +123,11 @@ function createElementLinks(
   prepend = true,
 ) {
   for (const $el of $parent.querySelectorAll(selector)) {
+    if (/** @type {HTMLElement} */ ($el).dataset.youtubeUrlObserved === "1") continue;
     const link = genLinkFromElement(/** @type {HTMLAnchorElement} */ ($el));
     const $target = getTarget($el);
     if (!$target) continue;
+    /** @type {HTMLElement} */ ($el).dataset.youtubeUrlObserved = "1";
     const createLink = genCreateLink($target, createButton, link, prepend);
     const observer = new MutationObserver(createLink);
     observer.observe($el, mutationObserverInit);
@@ -141,6 +143,8 @@ function genCreateLinks($parent) {
   return () => {
     // 動画ページ・ショートのメイン動画
     for (const $el of $parent.querySelectorAll("#actions")) {
+      if (/** @type {HTMLElement} */ ($el).dataset.youtubeUrlObserved === "1") continue;
+      /** @type {HTMLElement} */ ($el).dataset.youtubeUrlObserved = "1";
       const createLink = genCreateLink($el, createMenuButton, linkFromLocation);
       const observer = new MutationObserver(createLink);
       observer.observe($el, mutationObserverInit);
@@ -358,7 +362,16 @@ async function main() {
   if (!element) return; // elementが1分経っても見つからなければexit
 
   const createLinks = genCreateLinks(element);
-  const observer = new MutationObserver(createLinks);
+  let scheduled = false;
+  const scheduleCreateLinks = () => {
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(() => {
+      scheduled = false;
+      createLinks();
+    });
+  };
+  const observer = new MutationObserver(scheduleCreateLinks);
   observer.observe(element, mutationObserverInit);
   observers.push(observer);
 
